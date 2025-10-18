@@ -1,0 +1,34 @@
+2025-10-18T17:55:19.858Z [ERROR]: Error fetching products: RangeError: Invalid status code: 1. Status code must be greater than 99 and less than 1000.
+2025-10-18T17:55:19.862Z [ERROR]: Time: 2025-10-18T17:55:19.861Z
+Request URL: /api/inventory
+Request Body: {"stock":10,"reservedStock":0}
+Error Stack: RangeError: Invalid status code: 1. Status code must be greater than 99 and less than 1000.
+    at ServerResponse.status (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\express\lib\response.js:69:11)
+    at successResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils\utils\ResponseHandler.js:34:16)
+    at InventoryController.getAllProductsStock (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/controllers/inventory.controller.js:28:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-10-18T19:04:13.009Z [ERROR]: Error adding product: TypeError: Cannot destructure property 'productId' of 'req.body' as it is undefined.
+2025-10-18T19:04:13.012Z [ERROR]: Time: 2025-10-18T19:04:13.012Z
+Request URL: /api/inventory
+Request Body: undefined
+Error Stack: TypeError: Cannot destructure property 'productId' of 'req.body' as it is undefined.
+    at InventoryController.addNewProduct (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/controllers/inventory.controller.js:88:21)
+    at file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/routes/inventory.routes.js:16:25
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:295:15
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+2025-10-18T19:05:54.505Z [ERROR]: Time: 2025-10-18T19:05:54.505Z
+Request URL: /api/inventory
+Request Body: {"stock":12,"reservedStock":10,"productId":"12346453456"}
+Error Stack: Error: Duplicate entry '12346453456' for key 'inventory.unique_product_id'
+    at PromisePoolConnection.execute (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\mysql2\lib\promise\connection.js:47:22)
+    at InventoryRepository.addNewProductFromDb (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/repositories/inventory.repository.js:85:45)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InventoryController.addNewProduct (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/controllers/inventory.controller.js:92:30)
+2025-10-18T19:05:54.504Z [ERROR]: Error adding product: Error: Duplicate entry '12346453456' for key 'inventory.unique_product_id'
+2025-10-18T19:05:54.503Z [ERROR]: Error adding product: Error: Duplicate entry '12346453456' for key 'inventory.unique_product_id'
