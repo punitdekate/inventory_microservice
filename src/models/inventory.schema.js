@@ -6,7 +6,7 @@
 const createInventoryTableQuery = `
 CREATE TABLE IF NOT EXISTS inventory(
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    productId varchar(255) NOT NULL,
+    productId varchar(255) NOT NULL UNIQUE,
     stock INT NOT NULL,
     reservedStock INT DEFAULT 0,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

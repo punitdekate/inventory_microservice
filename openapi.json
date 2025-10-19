@@ -1,872 +1,931 @@
 {
-  "openapi": "3.0.3",
-  "info": {
-    "title": "Inventory Microservice API",
-    "description": "A comprehensive inventory management microservice that handles product stock, reservations, and stock operations",
-    "version": "1.0.0",
-    "contact": {
-      "name": "API Support",
-      "email": "support@inventory-service.com"
-    }
-  },
-  "servers": [
-    {
-      "url": "http://localhost:3000/api/inventory",
-      "description": "Development server"
-    }
-  ],
-  "paths": {
-    "/": {
-      "get": {
-        "summary": "Get all products stock",
-        "description": "Retrieve a paginated list of all products with their stock information. Supports filtering by stock levels.",
-        "tags": ["Products"],
-        "parameters": [
-          {
-            "name": "stock",
-            "in": "query",
-            "description": "Filter by exact stock amount",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          },
-          {
-            "name": "minStock",
-            "in": "query",
-            "description": "Filter by minimum stock amount",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          },
-          {
-            "name": "maxStock",
-            "in": "query",
-            "description": "Filter by maximum stock amount",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "Page number for pagination",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Number of items per page",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved products",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ProductStock"
-                      }
-                    },
-                    "pagination": {
-                      "type": "object",
-                      "properties": {
-                        "page": {
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "limit": {
-                          "type": "integer",
-                          "example": 10
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Inventory Microservice API",
+        "description": "A comprehensive inventory management microservice that handles product stock, reservations, and stock operations",
+        "version": "1.0.0",
+        "contact": {
+            "name": "API Support",
+            "email": "support@inventory-service.com"
         }
-      },
-      "post": {
-        "summary": "Add new product",
-        "description": "Add a new product to the inventory with initial stock and reserved stock values.",
-        "tags": ["Products"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api/inventory",
+            "description": "Development server"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Get all products stock",
+                "description": "Retrieve a paginated list of all products with their stock information. Supports filtering by stock levels.",
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "stock",
+                        "in": "query",
+                        "description": "Filter by exact stock amount",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "minStock",
+                        "in": "query",
+                        "description": "Filter by minimum stock amount",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "maxStock",
+                        "in": "query",
+                        "description": "Filter by maximum stock amount",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductStock"
+                                            }
+                                        },
+                                        "page": {
+                                            "type": "integer",
+                                            "description": "Current page number",
+                                            "example": 1
+                                        },
+                                        "limit": {
+                                            "type": "integer",
+                                            "description": "Number of items per page",
+                                            "example": 100
+                                        },
+                                        "totalCount": {
+                                            "type": "integer",
+                                            "description": "Total number of products",
+                                            "example": 8
+                                        }
+                                    },
+                                    "required": ["data", "page", "limit", "totalCount"]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new product",
+                "description": "Add a new product to the inventory with initial stock and reserved stock values.",
+                "tags": ["Products"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["productId", "stock"],
+                                "properties": {
+                                    "productId": {
+                                        "type": "string",
+                                        "description": "Unique identifier for the product",
+                                        "example": "PROD-001"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "description": "Initial stock amount",
+                                        "example": 100
+                                    },
+                                    "reservedStock": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "description": "Initial reserved stock amount",
+                                        "default": 0,
+                                        "example": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ProductStock"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/{productId}": {
+            "get": {
+                "summary": "Get product stock by ID",
+                "description": "Retrieve stock information for a specific product by its ID.",
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Unique identifier of the product",
+                        "schema": {
+                            "type": "string",
+                            "example": "PROD-001"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product stock retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ProductStock"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update product stock",
+                "description": "Update stock or reserved stock for a specific product.",
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Unique identifier of the product",
+                        "schema": {
+                            "type": "string",
+                            "example": "PROD-001"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "stock": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "description": "New stock amount",
+                                        "example": 150
+                                    },
+                                    "reservedStock": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "description": "New reserved stock amount",
+                                        "example": 10
+                                    }
+                                },
+                                "anyOf": [{ "required": ["stock"] }, { "required": ["reservedStock"] }]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ProductStock"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete product",
+                "description": "Remove a product from the inventory.",
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Unique identifier of the product",
+                        "schema": {
+                            "type": "string",
+                            "example": "PROD-001"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Product deleted successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/{productId}/reserve": {
+            "post": {
+                "summary": "Reserve stock",
+                "description": "Reserve a specific quantity of stock for a product.",
+                "tags": ["Stock Operations"],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Unique identifier of the product",
+                        "schema": {
+                            "type": "string",
+                            "example": "PROD-001"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["quantity"],
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "description": "Quantity to reserve",
+                                        "example": 5
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Stock reserved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Stock reserved successfully"
+                                                },
+                                                "success": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/{productId}/release": {
+            "post": {
+                "summary": "Release reserved stock",
+                "description": "Release previously reserved stock for a product.",
+                "tags": ["Stock Operations"],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Unique identifier of the product",
+                        "schema": {
+                            "type": "string",
+                            "example": "PROD-001"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reserved stock released successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Reserved stock released successfully"
+                                                },
+                                                "success": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/{productId}/deduct": {
+            "post": {
+                "summary": "Deduct stock",
+                "description": "Deduct reserved stock from a product (typically used when order is confirmed).",
+                "tags": ["Stock Operations"],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Unique identifier of the product",
+                        "schema": {
+                            "type": "string",
+                            "example": "PROD-001"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Stock deducted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Stock deducted successfully"
+                                                },
+                                                "success": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/bulk": {
+            "post": {
+                "summary": "Add bulk products",
+                "description": "Add multiple products to inventory in a single operation.",
+                "tags": ["Bulk Operations"],
+                "responses": {
+                    "500": {
+                        "description": "Not implemented yet",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update bulk products",
+                "description": "Update multiple products in inventory in a single operation.",
+                "tags": ["Bulk Operations"],
+                "responses": {
+                    "500": {
+                        "description": "Not implemented yet",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete bulk products",
+                "description": "Delete multiple products from inventory in a single operation.",
+                "tags": ["Bulk Operations"],
+                "responses": {
+                    "500": {
+                        "description": "Not implemented yet",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cron/release-expired": {
+            "post": {
+                "summary": "Release expired reservations",
+                "description": "Cron job endpoint to release expired stock reservations. This endpoint is typically called by a scheduled job.",
+                "tags": ["Cron Jobs"],
+                "responses": {
+                    "200": {
+                        "description": "Cron job executed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Cron job executed successfully"
+                                                },
+                                                "success": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "details": {
+                                                    "type": "object",
+                                                    "description": "Details about the cron job execution"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "summary": "Health check",
+                "description": "Check the health status of the inventory service.",
+                "tags": ["Health"],
+                "responses": {
+                    "200": {
+                        "description": "Service is running",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "running"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ProductStock": {
                 "type": "object",
-                "required": ["productId", "stock"],
                 "properties": {
-                  "productId": {
-                    "type": "string",
-                    "description": "Unique identifier for the product",
-                    "example": "PROD-001"
-                  },
-                  "stock": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "description": "Initial stock amount",
-                    "example": 100
-                  },
-                  "reservedStock": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "description": "Initial reserved stock amount",
-                    "default": 0,
-                    "example": 0
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Product added successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
+                    "id": {
+                        "type": "integer",
+                        "description": "Database primary key",
+                        "example": 3
                     },
-                    "data": {
-                      "$ref": "#/components/schemas/ProductStock"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/{productId}": {
-      "get": {
-        "summary": "Get product stock by ID",
-        "description": "Retrieve stock information for a specific product by its ID.",
-        "tags": ["Products"],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the product",
-            "schema": {
-              "type": "string",
-              "example": "PROD-001"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Product stock retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
+                    "productId": {
+                        "type": "string",
+                        "description": "Unique identifier for the product",
+                        "example": "PROD-001"
                     },
-                    "data": {
-                      "$ref": "#/components/schemas/ProductStock"
+                    "stock": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Current available stock",
+                        "example": 100
+                    },
+                    "reservedStock": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Currently reserved stock",
+                        "example": 10
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Product creation timestamp",
+                        "example": "2024-01-15T10:30:00Z"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Last update timestamp",
+                        "example": "2024-01-15T10:30:00Z"
                     }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update product stock",
-        "description": "Update stock or reserved stock for a specific product.",
-        "tags": ["Products"],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the product",
-            "schema": {
-              "type": "string",
-              "example": "PROD-001"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
+                },
+                "required": ["id", "productId", "stock", "reservedStock"]
+            },
+            "ErrorResponse": {
                 "type": "object",
                 "properties": {
-                  "stock": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "description": "New stock amount",
-                    "example": 150
-                  },
-                  "reservedStock": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "description": "New reserved stock amount",
-                    "example": 10
-                  }
-                },
-                "anyOf": [
-                  {"required": ["stock"]},
-                  {"required": ["reservedStock"]}
-                ]
-              }
+                    "success": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "error": {
+                        "type": "string",
+                        "description": "Error message"
+                    },
+                    "statusCode": {
+                        "type": "integer",
+                        "description": "HTTP status code"
+                    }
+                }
             }
-          }
         },
         "responses": {
-          "200": {
-            "description": "Product updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ProductStock"
+            "BadRequest": {
+                "description": "Bad request - Invalid input parameters",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "error": {
+                                    "type": "string",
+                                    "description": "Error message"
+                                },
+                                "statusCode": {
+                                    "type": "integer",
+                                    "example": 400
+                                }
+                            }
+                        },
+                        "examples": {
+                            "invalidStock": {
+                                "summary": "Invalid stock value",
+                                "value": {
+                                    "success": false,
+                                    "error": "Invalid stock, minStock or maxStock value",
+                                    "statusCode": 400
+                                }
+                            },
+                            "productIdRequired": {
+                                "summary": "Product ID required",
+                                "value": {
+                                    "success": false,
+                                    "error": "Product ID is required",
+                                    "statusCode": 400
+                                }
+                            },
+                            "invalidStockOrReservedStock": {
+                                "summary": "Invalid stock or reserved stock",
+                                "value": {
+                                    "success": false,
+                                    "error": "Invalid stock or reservedStock value",
+                                    "statusCode": 400
+                                }
+                            },
+                            "stockOrReservedStockRequired": {
+                                "summary": "Stock or reserved stock required",
+                                "value": {
+                                    "success": false,
+                                    "error": "At least one of stock or reservedStock must be provided",
+                                    "statusCode": 400
+                                }
+                            },
+                            "invalidProductData": {
+                                "summary": "Invalid product data",
+                                "value": {
+                                    "success": false,
+                                    "error": "Invalid productId, stock or reservedStock value",
+                                    "statusCode": 400
+                                }
+                            },
+                            "invalidProductIdOrQuantity": {
+                                "summary": "Invalid product ID or quantity",
+                                "value": {
+                                    "success": false,
+                                    "error": "Invalid product id or quantity",
+                                    "statusCode": 400
+                                }
+                            },
+                            "userIdRequired": {
+                                "summary": "User ID required",
+                                "value": {
+                                    "success": false,
+                                    "error": "User ID is required to release reserved stock",
+                                    "statusCode": 400
+                                }
+                            }
+                        }
                     }
-                  }
                 }
-              }
+            },
+            "NotFound": {
+                "description": "Resource not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "error": {
+                                    "type": "string",
+                                    "example": "Product not found"
+                                },
+                                "statusCode": {
+                                    "type": "integer",
+                                    "example": 404
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Internal server error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "error": {
+                                    "type": "string",
+                                    "description": "Error message"
+                                },
+                                "statusCode": {
+                                    "type": "integer",
+                                    "example": 500
+                                }
+                            }
+                        },
+                        "examples": {
+                            "failedToUpdate": {
+                                "summary": "Failed to update product",
+                                "value": {
+                                    "success": false,
+                                    "error": "Failed to update product",
+                                    "statusCode": 500
+                                }
+                            },
+                            "failedToAdd": {
+                                "summary": "Failed to add product",
+                                "value": {
+                                    "success": false,
+                                    "error": "Failed to add product",
+                                    "statusCode": 500
+                                }
+                            },
+                            "failedToDelete": {
+                                "summary": "Failed to delete product",
+                                "value": {
+                                    "success": false,
+                                    "error": "Failed to delete product",
+                                    "statusCode": 500
+                                }
+                            },
+                            "failedToReleaseReservedStock": {
+                                "summary": "Failed to release reserved stock",
+                                "value": {
+                                    "success": false,
+                                    "error": "Failed to release reserved stock. Check if reserved stock exists.",
+                                    "statusCode": 500
+                                }
+                            },
+                            "failedToReserveStock": {
+                                "summary": "Failed to reserve stock",
+                                "value": {
+                                    "success": false,
+                                    "error": "Failed to reserve stock. Check if sufficient stock is available.",
+                                    "statusCode": 500
+                                }
+                            },
+                            "failedToDeductStock": {
+                                "summary": "Failed to deduct stock",
+                                "value": {
+                                    "success": false,
+                                    "error": "Failed to deduct stock. Check if reserved stock exists.",
+                                    "statusCode": 500
+                                }
+                            },
+                            "notImplemented": {
+                                "summary": "Not implemented",
+                                "value": {
+                                    "success": false,
+                                    "error": "Not implemented yet",
+                                    "statusCode": 500
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
         }
-      },
-      "delete": {
-        "summary": "Delete product",
-        "description": "Remove a product from the inventory.",
-        "tags": ["Products"],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the product",
-            "schema": {
-              "type": "string",
-              "example": "PROD-001"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Product deleted successfully"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
     },
-    "/{productId}/reserve": {
-      "post": {
-        "summary": "Reserve stock",
-        "description": "Reserve a specific quantity of stock for a product.",
-        "tags": ["Stock Operations"],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the product",
-            "schema": {
-              "type": "string",
-              "example": "PROD-001"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["quantity"],
-                "properties": {
-                  "quantity": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "description": "Quantity to reserve",
-                    "example": 5
-                  }
-                }
-              }
-            }
-          }
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Product stock management operations"
         },
-        "responses": {
-          "201": {
-            "description": "Stock reserved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "example": "Stock reserved successfully"
-                        },
-                        "success": {
-                          "type": "boolean",
-                          "example": true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/{productId}/release": {
-      "post": {
-        "summary": "Release reserved stock",
-        "description": "Release previously reserved stock for a product.",
-        "tags": ["Stock Operations"],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the product",
-            "schema": {
-              "type": "string",
-              "example": "PROD-001"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Reserved stock released successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "example": "Reserved stock released successfully"
-                        },
-                        "success": {
-                          "type": "boolean",
-                          "example": true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/{productId}/deduct": {
-      "post": {
-        "summary": "Deduct stock",
-        "description": "Deduct reserved stock from a product (typically used when order is confirmed).",
-        "tags": ["Stock Operations"],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the product",
-            "schema": {
-              "type": "string",
-              "example": "PROD-001"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Stock deducted successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "example": "Stock deducted successfully"
-                        },
-                        "success": {
-                          "type": "boolean",
-                          "example": true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/bulk": {
-      "post": {
-        "summary": "Add bulk products",
-        "description": "Add multiple products to inventory in a single operation.",
-        "tags": ["Bulk Operations"],
-        "responses": {
-          "500": {
-            "description": "Not implemented yet",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Update bulk products",
-        "description": "Update multiple products in inventory in a single operation.",
-        "tags": ["Bulk Operations"],
-        "responses": {
-          "500": {
-            "description": "Not implemented yet",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete bulk products",
-        "description": "Delete multiple products from inventory in a single operation.",
-        "tags": ["Bulk Operations"],
-        "responses": {
-          "500": {
-            "description": "Not implemented yet",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/cron/release-expired": {
-      "post": {
-        "summary": "Release expired reservations",
-        "description": "Cron job endpoint to release expired stock reservations. This endpoint is typically called by a scheduled job.",
-        "tags": ["Cron Jobs"],
-        "responses": {
-          "200": {
-            "description": "Cron job executed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "example": "Cron job executed successfully"
-                        },
-                        "success": {
-                          "type": "boolean",
-                          "example": true
-                        },
-                        "details": {
-                          "type": "object",
-                          "description": "Details about the cron job execution"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/health": {
-      "get": {
-        "summary": "Health check",
-        "description": "Check the health status of the inventory service.",
-        "tags": ["Health"],
-        "responses": {
-          "200": {
-            "description": "Service is running",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "running"
-                    },
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "ProductStock": {
-        "type": "object",
-        "properties": {
-          "productId": {
-            "type": "string",
-            "description": "Unique identifier for the product",
-            "example": "PROD-001"
-          },
-          "stock": {
-            "type": "integer",
-            "minimum": 0,
-            "description": "Current available stock",
-            "example": 100
-          },
-          "reservedStock": {
-            "type": "integer",
-            "minimum": 0,
-            "description": "Currently reserved stock",
-            "example": 10
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Product creation timestamp",
-            "example": "2024-01-15T10:30:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Last update timestamp",
-            "example": "2024-01-15T10:30:00Z"
-          }
+        {
+            "name": "Stock Operations",
+            "description": "Stock reservation, release, and deduction operations"
         },
-        "required": ["productId", "stock", "reservedStock"]
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": false
-          },
-          "error": {
-            "type": "string",
-            "description": "Error message"
-          },
-          "statusCode": {
-            "type": "integer",
-            "description": "HTTP status code"
-          }
+        {
+            "name": "Bulk Operations",
+            "description": "Bulk product operations (not yet implemented)"
+        },
+        {
+            "name": "Cron Jobs",
+            "description": "Scheduled job endpoints"
+        },
+        {
+            "name": "Health",
+            "description": "Service health check endpoints"
         }
-      }
-    },
-    "responses": {
-      "BadRequest": {
-        "description": "Bad request - Invalid input parameters",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "error": {
-                  "type": "string",
-                  "examples": {
-                    "invalidStock": {
-                      "summary": "Invalid stock value",
-                      "value": "Invalid stock, minStock or maxStock value"
-                    },
-                    "productIdRequired": {
-                      "summary": "Product ID required",
-                      "value": "Product ID is required"
-                    },
-                    "invalidStockOrReservedStock": {
-                      "summary": "Invalid stock or reserved stock",
-                      "value": "Invalid stock or reservedStock value"
-                    },
-                    "stockOrReservedStockRequired": {
-                      "summary": "Stock or reserved stock required",
-                      "value": "At least one of stock or reservedStock must be provided"
-                    },
-                    "invalidProductData": {
-                      "summary": "Invalid product data",
-                      "value": "Invalid productId, stock or reservedStock value"
-                    },
-                    "invalidProductIdOrQuantity": {
-                      "summary": "Invalid product ID or quantity",
-                      "value": "Invalid product id or quantity"
-                    },
-                    "userIdRequired": {
-                      "summary": "User ID required",
-                      "value": "User ID is required to release reserved stock"
-                    }
-                  }
-                },
-                "statusCode": {
-                  "type": "integer",
-                  "example": 400
-                }
-              }
-            }
-          }
-        }
-      },
-      "NotFound": {
-        "description": "Resource not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "error": {
-                  "type": "string",
-                  "example": "Product not found"
-                },
-                "statusCode": {
-                  "type": "integer",
-                  "example": 404
-                }
-              }
-            }
-          }
-        }
-      },
-      "InternalServerError": {
-        "description": "Internal server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "error": {
-                  "type": "string",
-                  "examples": {
-                    "failedToUpdate": {
-                      "summary": "Failed to update product",
-                      "value": "Failed to update product"
-                    },
-                    "failedToAdd": {
-                      "summary": "Failed to add product",
-                      "value": "Failed to add product"
-                    },
-                    "failedToDelete": {
-                      "summary": "Failed to delete product",
-                      "value": "Failed to delete product"
-                    },
-                    "failedToReleaseReservedStock": {
-                      "summary": "Failed to release reserved stock",
-                      "value": "Failed to release reserved stock. Check if reserved stock exists."
-                    },
-                    "failedToReserveStock": {
-                      "summary": "Failed to reserve stock",
-                      "value": "Failed to reserve stock. Check if sufficient stock is available."
-                    },
-                    "failedToDeductStock": {
-                      "summary": "Failed to deduct stock",
-                      "value": "Failed to deduct stock. Check if reserved stock exists."
-                    },
-                    "notImplemented": {
-                      "summary": "Not implemented",
-                      "value": "Not implemented yet"
-                    }
-                  }
-                },
-                "statusCode": {
-                  "type": "integer",
-                  "example": 500
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Products",
-      "description": "Product stock management operations"
-    },
-    {
-      "name": "Stock Operations",
-      "description": "Stock reservation, release, and deduction operations"
-    },
-    {
-      "name": "Bulk Operations",
-      "description": "Bulk product operations (not yet implemented)"
-    },
-    {
-      "name": "Cron Jobs",
-      "description": "Scheduled job endpoints"
-    },
-    {
-      "name": "Health",
-      "description": "Service health check endpoints"
-    }
-  ]
+    ]
 }

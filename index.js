@@ -8,6 +8,7 @@ import helmet from "helmet";
 import expressRateLimiter from "express-rate-limit";
 import pkg from "helper-utils";
 import { requestContextMiddleware } from "./src/middlewares/requestContext.middleware.js";
+import auth from "./src/middlewares/auth.middleware.js";
 const { logger, errorHandler } = pkg;
 
 const app = express();
@@ -41,7 +42,7 @@ app.get("/api/inventory/health", (req, res, next) => {
     res.status(200).json({ status: "running", success: true });
 });
 
-app.use("/api/inventory", inventoryRouter);
+app.use("/api/inventory", auth, inventoryRouter);
 
 app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
