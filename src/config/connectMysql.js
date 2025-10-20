@@ -1,7 +1,7 @@
 "use strict";
 import mysql from "mysql2/promise";
 import { createInventoryReservations, createInventoryTableQuery } from "../models/inventory.schema.js";
-import pkg from "helper-utils";
+import pkg from "helper-utils-library";
 const { logger } = pkg;
 
 const pool = mysql.createPool({

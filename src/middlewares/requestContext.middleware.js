@@ -1,5 +1,5 @@
 "use strict";
-import pkg from "helper-utils";
+import pkg from "helper-utils-library";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 const { logger, requestContext } = pkg;

@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import inventoryRouter from "./src/routes/inventory.routes.js";
 import helmet from "helmet";
 import expressRateLimiter from "express-rate-limit";
-import pkg from "helper-utils";
+import pkg from "helper-utils-library";
 import { requestContextMiddleware } from "./src/middlewares/requestContext.middleware.js";
 import auth from "./src/middlewares/auth.middleware.js";
 const { logger, errorHandler } = pkg;

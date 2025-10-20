@@ -18,7 +18,7 @@
         "express": "^5.1.0",
         "express-rate-limit": "^8.1.0",
         "helmet": "^8.1.0",
-        "helper-utils": "git+https://punitdekate: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@github.com/punitdekate/helper-utils.git",
+        "helper-utils-library": "^1.0.3",
         "jsonwebtoken": "^9.0.2",
         "mysql2": "^3.15.2",
         "node-cron": "^4.2.1",

@@ -32,3 +32,143 @@ Error Stack: Error: Duplicate entry '12346453456' for key 'inventory.unique_prod
     at async InventoryController.addNewProduct (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/controllers/inventory.controller.js:92:30)
 2025-10-18T19:05:54.504Z [ERROR]: Error adding product: Error: Duplicate entry '12346453456' for key 'inventory.unique_product_id'
 2025-10-18T19:05:54.503Z [ERROR]: Error adding product: Error: Duplicate entry '12346453456' for key 'inventory.unique_product_id'
+2025-10-19T12:23:02.616Z [ERROR]: Time: 2025-10-19T12:23:02.615Z
+Request URL: /api/inventory/2345412346/release
+Request Body: {"quantity":1}
+Error Stack: ReferenceError: options is not defined
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:56)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\read.js:132:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\raw-body\index.js:238:16)
+2025-10-19T12:30:00.048Z [ERROR]: Time: 2025-10-19T12:30:00.047Z
+Request URL: /api/inventory/cron/release-expired
+Request Body: undefined
+Error Stack: ReferenceError: options is not defined
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:56)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at jsonParser (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\types\json.js:109:7)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+2025-10-19T12:33:00.440Z [ERROR]: Time: 2025-10-19T12:33:00.440Z
+Request URL: /api/inventory/2345412346/release
+Request Body: {"quantity":1}
+Error Stack: TypeError: Cannot destructure property 'page' of 'options' as it is undefined.
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:13)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\read.js:132:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\raw-body\index.js:238:16)
+2025-10-19T12:33:03.175Z [ERROR]: Time: 2025-10-19T12:33:03.174Z
+Request URL: /api/inventory/2345412346/release
+Request Body: {"quantity":1}
+Error Stack: TypeError: Cannot destructure property 'page' of 'options' as it is undefined.
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:13)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\read.js:132:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\raw-body\index.js:238:16)
+2025-10-19T12:45:00.064Z [ERROR]: Time: 2025-10-19T12:45:00.063Z
+Request URL: /api/inventory/cron/release-expired
+Request Body: undefined
+Error Stack: TypeError: Cannot destructure property 'page' of 'options' as it is undefined.
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:13)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at jsonParser (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\types\json.js:109:7)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+2025-10-19T12:49:35.144Z [ERROR]: Time: 2025-10-19T12:49:35.143Z
+Request URL: /api/inventory/2345412346/release
+Request Body: {"quantity":1}
+Error Stack: TypeError: Cannot read properties of undefined (reading 'headers')
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:13)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\read.js:132:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\raw-body\index.js:238:16)
+2025-10-19T12:52:08.971Z [ERROR]: Time: 2025-10-19T12:52:08.970Z
+Request URL: /api/inventory/2345412346/release
+Request Body: {"quantity":1}
+Error Stack: TypeError: Cannot read properties of undefined (reading 'headers')
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:13)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\read.js:132:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\raw-body\index.js:238:16)
+2025-10-19T12:55:03.996Z [ERROR]: Time: 2025-10-19T12:55:03.996Z
+Request URL: /api/inventory/2345412346/release
+Request Body: {"quantity":1}
+Error Stack: TypeError: Cannot read properties of undefined (reading 'headers')
+    at failureResponse (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\helper-utils-library\utils\ResponseHandler.js:46:13)
+    at auth (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/auth.middleware.js:9:20)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\body-parser\lib\read.js:132:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\raw-body\index.js:238:16)
+2025-10-19T16:50:56.632Z [ERROR]: Time: 2025-10-19T16:50:56.631Z
+Request URL: /
+Request Body: undefined
+Error Stack: JsonWebTokenError: secret or public key must be provided
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\jsonwebtoken\verify.js:113:19
+    at getSecret (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\jsonwebtoken\verify.js:101:10)
+    at requestContextMiddleware (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/requestContext.middleware.js:12:23)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/node_modules/express-rate-limit/dist/index.mjs:870:7
+2025-10-19T16:56:51.099Z [ERROR]: Time: 2025-10-19T16:56:51.098Z
+Request URL: /
+Request Body: undefined
+Error Stack: JsonWebTokenError: secret or public key must be provided
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\jsonwebtoken\verify.js:113:19
+    at getSecret (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\jsonwebtoken\verify.js:101:10)
+    at requestContextMiddleware (file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/src/middlewares/requestContext.middleware.js:12:23)
+    at Layer.handleRequest (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:342:13)
+    at C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:297:9
+    at processParams (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:582:12)
+    at next (C:\Users\punit\OneDrive\Desktop\Node Projects\inventory_microservice\node_modules\router\index.js:291:5)
+    at file:///C:/Users/punit/OneDrive/Desktop/Node%20Projects/inventory_microservice/node_modules/express-rate-limit/dist/index.mjs:870:7

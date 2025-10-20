@@ -13,7 +13,7 @@ import {
     updateProductByIdQuery
 } from "../models/inventory.schema.js";
 import getDbConnection from "../config/connectMysql.js";
-import pkg from "helper-utils";
+import pkg from "helper-utils-library";
 const { logger } = pkg;
 
 export default class InventoryRepository {

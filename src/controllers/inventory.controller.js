@@ -2,7 +2,7 @@
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from "../../constants.js";
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "../../errorMessages.js";
 import InventoryRepository from "../repositories/inventory.repository.js";
-import pkg from "helper-utils";
+import pkg from "helper-utils-library";
 const { logger, failureResponse, successResponse, BadRequest, Unauthorized, ResourceNotFound, InternalServerError } = pkg;
 
 export default class InventoryController {

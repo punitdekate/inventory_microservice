@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import pkg from "helper-utils";
+import pkg from "helper-utils-library";
 const { failureResponse, Unauthorized } = pkg;
 
 function auth(req, res, next) {
